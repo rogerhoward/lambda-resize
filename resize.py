@@ -3,7 +3,8 @@ import json
 import boto3
 import time
 import urllib
-import PIL
+from PIL import Image
+
 
 new_bucket = 'pylambda-thumb'
 s3 = boto3.client('s3')
@@ -17,7 +18,7 @@ def lambda_handler(event, context):
 
     s3.download_file(bucket, key, local_file)
 
-    im = PIL.Image.open(local_file)
+    im = Image.open(local_file)
     im.thumbnail(size)
     im.save(out_path)
 
